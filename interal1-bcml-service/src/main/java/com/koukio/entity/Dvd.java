@@ -9,6 +9,14 @@ public class Dvd {
 	public String category;
 	public Date dateCreated;
 	
+	public Dvd(int dvdId, String title, String description, String category, Date dateCreated) {
+		this.dvdId = dvdId;
+		this.title = title;
+		this.description = description;
+		this.category = category;
+		this.dateCreated = dateCreated;
+	}
+	
 	public int getDvdId() {
 		return dvdId;
 	}
