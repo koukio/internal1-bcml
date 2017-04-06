@@ -8,6 +8,7 @@ public class Dvd {
 	public String description;
 	public String category;
 	public Date dateCreated;
+	public boolean deleted;
 	
 	public Dvd(int dvdId, String title, String description, String category, Date dateCreated) {
 		this.dvdId = dvdId;
@@ -15,6 +16,7 @@ public class Dvd {
 		this.description = description;
 		this.category = category;
 		this.dateCreated = dateCreated;
+		this.deleted = false;
 	}
 	
 	public int getDvdId() {
@@ -46,5 +48,11 @@ public class Dvd {
 	}
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 }
