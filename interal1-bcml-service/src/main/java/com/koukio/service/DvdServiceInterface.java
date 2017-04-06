@@ -14,7 +14,7 @@ public interface DvdServiceInterface {
     
     public List<Dvd> showDvdList() throws Exception;
     
-    public List<Dvd> searchDvdTitle() throws Exception;
+    public List<Dvd> searchDvdTitle(String title) throws Exception;
     
     public List<Dvd> searchDvdKeyword() throws Exception;
     
