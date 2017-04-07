@@ -33,7 +33,7 @@ public class CustomerService {
 		//      throw new NotImplementedException();
 		Customer customer = new Customer(customerId, name, firstName, lastName, birthDate, email);
 		if (customers.add(customer)) {
-			return "";
+			return "Customer Update";
 		}else return "This customer already exists";
 	}
 	

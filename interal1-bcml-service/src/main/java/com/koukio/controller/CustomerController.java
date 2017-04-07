@@ -1,15 +1,13 @@
 package com.koukio.controller;
 
-import com.koukio.entity.Customer;
-import com.koukio.service.CustomerServiceInterface;
-
 import java.util.Date;
 
-import org.junit.experimental.categories.CategoryValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.koukio.service.CustomerService;
 
 /**
  * CustomerController
@@ -19,7 +17,7 @@ public class CustomerController {
 
 
 	@Autowired
-	CustomerServiceInterface customerService;
+	CustomerService customerService;
 
 	// check more documentation at https://spring.io/guides/gs/rest-service/
 

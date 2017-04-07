@@ -13,7 +13,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * DvdService
  */
 @Component
-public class DvdService implements DvdServiceInterface{
+public class DvdService {
 	List<Dvd> dvdList = new ArrayList<Dvd>();
 
     public Dvd createDvd(String title, String description, String category, Date dateCreated) throws Exception{
