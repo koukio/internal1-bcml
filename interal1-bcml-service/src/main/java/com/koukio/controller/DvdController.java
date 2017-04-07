@@ -35,6 +35,17 @@ public class DvdController {
         return  dvdService.createDvd(title, description, category, dateCreated);
     }
 
-
-
+    @RequestMapping("/dvd")
+    public Dvd updateDvd(@RequestParam(value="dvdId") int dvdId,
+    		@RequestParam(value="title") String title,
+    		@RequestParam(value="description") String description,
+    		@RequestParam(value="category") String category,
+    		@RequestParam(value="dateCreated") Date dateCreated) throws Exception {
+        return  dvdService.updateDvd(dvdId, title, description, category, dateCreated);
+    }
+    
+    @RequestMapping("/dvd")
+    public Dvd deleteDvd(@RequestParam(value="dvdId") int dvdId) throws Exception {
+        return  dvdService.deleteDvd(dvdId);
+    }
 }
