@@ -53,7 +53,7 @@ public class CustomerController {
 		}else return "Error in fields";
 	}
 
-	private boolean validateCustomer(String name, String firstName, String lastName, Date birthDate, String email){
+	public boolean validateCustomer(String name, String firstName, String lastName, Date birthDate, String email){
 		Date fecha = new Date();
 		if (name !="") {
 			if (firstName !="") {
@@ -70,7 +70,7 @@ public class CustomerController {
 
 	}
 
-	private boolean validate(String email) {
+	public boolean validate(String email) {
 		char car;
 		for (int i = 0; i < email.length(); i++) {
 			car=email.charAt(i);
