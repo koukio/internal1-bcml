@@ -2,7 +2,6 @@ package com.koukio.controller;
 
 import com.koukio.entity.Dvd;
 import com.koukio.service.DvdService;
-import com.koukio.service.DvdServiceInterface;
 
 import java.util.Date;
 
@@ -19,7 +18,7 @@ public class DvdController {
 
 
     @Autowired
-    DvdServiceInterface dvdService;
+    DvdService dvdService;
 
     // check more documentation at https://spring.io/guides/gs/rest-service/
 
