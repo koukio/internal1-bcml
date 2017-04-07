@@ -29,7 +29,7 @@ public class DvdController {
     }
 
     @RequestMapping("/dvd")
-    public Dvd createCustomer(@RequestParam(value="title") String title,
+    public Dvd createDvd(@RequestParam(value="title") String title,
     		@RequestParam(value="description") String description,
     		@RequestParam(value="category") String category,
     		@RequestParam(value="dateCreated") Date dateCreated) throws Exception {
