@@ -17,13 +17,13 @@ public class DvdService {
 	List<Dvd> dvdList = new ArrayList<Dvd>();
 
     public Dvd createDvd(String title, String description, String category, Date dateCreated) throws Exception{
-        Dvd dvd = new Dvd(dvdList.size(), category, category, category, dateCreated);
+        Dvd dvd = new Dvd(dvdList.size(), title, description, category, dateCreated);
         dvdList.add(dvdList.size(),dvd);
         return dvd;
     }
     
     public Dvd updateDvd(int dvdId, String title, String description, String category, Date dateCreated) throws Exception{
-        Dvd dvd = new Dvd(dvdId, category, category, category, dateCreated);
+        Dvd dvd = new Dvd(dvdId, title, description, category, dateCreated);
         dvdList.set(dvdId, dvd);
     	return dvd;
     }
