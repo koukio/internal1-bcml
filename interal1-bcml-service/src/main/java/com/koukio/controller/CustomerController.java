@@ -60,7 +60,7 @@ public class CustomerController {
 		if (name !="") {
 			if (firstName !="") {
 				if (lastName!="") {
-					if (birthDate.getYear()<fecha.getYear() && birthDate.getMonth()<fecha.getMonth() && birthDate.getDay()<fecha.getDay()) {
+					if (birthDate.before(fecha)) {
 						if (validate(email)) {
 							return true;
 						}
