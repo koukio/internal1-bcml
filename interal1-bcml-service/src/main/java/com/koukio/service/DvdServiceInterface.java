@@ -16,7 +16,7 @@ public interface DvdServiceInterface {
     
     public List<Dvd> searchDvdTitle(String title) throws Exception;
     
-    public List<Dvd> searchDvdKeyword() throws Exception;
+    public List<Dvd> searchDvdKeyword(String keyword) throws Exception;
     
     public String ping();
 }

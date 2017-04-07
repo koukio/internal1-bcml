@@ -47,9 +47,14 @@ public class DvdService implements DvdServiceInterface{
     	return dvdListbyTitle;
     }
 
-    public List<Dvd> searchDvdKeyword() throws Exception{
-    	
-    	return dvdList;
+    public List<Dvd> searchDvdKeyword(String keyword) throws Exception{
+    	List<Dvd> dvdListbyKeyword = new ArrayList<>();
+    	for (Dvd dvd : dvdList) {
+			if (dvd.description.contains(keyword)){
+				dvdListbyKeyword.add(dvd);
+			}
+		}
+    	return dvdListbyKeyword;
     }
     
     public String ping() {
