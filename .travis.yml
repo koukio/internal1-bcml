@@ -1,0 +1,6 @@
+language: java
+jdk:
+ - oraclejdk8
+ 
+before_script: cd interal1-bcml-service
+script: ./mvnw install
