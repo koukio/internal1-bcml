@@ -15,6 +15,12 @@ import org.springframework.stereotype.Component;
 public class EventService {
 	List<Event> eventList = new ArrayList<>();
 	
+    public Event createEvent(String action, String object, Date eventDate) throws Exception{
+        Event event = new Event(action, object, eventDate);
+        eventList.add(event);
+        return event;
+    }
+	
     public List<Event> filterEvents(Date firstDate, Date lastDate) throws Exception{
     	List<Event> eventListFiltered = new ArrayList<>();
     	for (Event event : eventList) {
