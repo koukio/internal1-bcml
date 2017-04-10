@@ -4,6 +4,7 @@ import com.koukio.entity.Dvd;
 import com.koukio.service.DvdService;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ public class DvdController {
         return "pong:" + dvdService.ping();
     }
 
-    @RequestMapping("/dvd")
+    @RequestMapping("/createDvd")
     public Dvd createDvd(@RequestParam(value="title") String title,
     		@RequestParam(value="description") String description,
     		@RequestParam(value="category") String category,
@@ -35,7 +36,7 @@ public class DvdController {
         return  dvdService.createDvd(title, description, category, dateCreated);
     }
 
-    @RequestMapping("/dvd")
+    @RequestMapping("/updateDvd")
     public Dvd updateDvd(@RequestParam(value="dvdId") int dvdId,
     		@RequestParam(value="title") String title,
     		@RequestParam(value="description") String description,
@@ -44,8 +45,24 @@ public class DvdController {
         return  dvdService.updateDvd(dvdId, title, description, category, dateCreated);
     }
     
-    @RequestMapping("/dvd")
+    @RequestMapping("/deleteDvd")
     public Dvd deleteDvd(@RequestParam(value="dvdId") int dvdId) throws Exception {
         return  dvdService.deleteDvd(dvdId);
+    }
+    
+    
+    @RequestMapping("/showDvdList")
+    public List<Dvd> showDvdList() throws Exception {
+        return  dvdService.showDvdList();
+    }
+    
+    @RequestMapping("/searchDvdTitle")
+    public List<Dvd> searchDvdTitle(@RequestParam(value="title") String title) throws Exception {
+        return  dvdService.searchDvdTitle(title);
+    }
+    
+    @RequestMapping("/searchDvdKeyword")
+    public List<Dvd> searchDvdKeyword(@RequestParam(value="keyword") String keyword) throws Exception {
+        return  dvdService.searchDvdKeyword(keyword);
     }
 }
