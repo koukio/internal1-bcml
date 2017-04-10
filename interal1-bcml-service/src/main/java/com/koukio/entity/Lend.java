@@ -6,11 +6,10 @@ public class Lend {
 	Dvd dvd;
 	Boolean taken;
 	
-	public Lend(Customer customer, Dvd dvd, Boolean taken) {
-		super();
+	public Lend(Customer customer, Dvd dvd) {
 		this.customer = customer;
 		this.dvd = dvd;
-		this.taken = taken;
+		this.taken = true;
 	}
 	
 	public Customer getCustomer() {
