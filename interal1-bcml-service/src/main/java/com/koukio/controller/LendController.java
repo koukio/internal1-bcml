@@ -17,13 +17,13 @@ public class LendController {
 		return "pong:" + lendService.ping();
 	}
 
-	@RequestMapping("/lend")
+	@RequestMapping("/createlend")
 	public Lend createLend(@RequestParam(value="customer") Customer customer,
 			@RequestParam(value="dvd") Dvd dvd) throws Exception {
 		return  lendService.createLend(customer, dvd);
 	}
 
-	@RequestMapping("/lend")
+	@RequestMapping("/returnDvd")
 	public void returnLend(@RequestParam(value="customer") Customer customer,
 			@RequestParam(value="dvd") Dvd dvd) throws Exception {
 		if (lendService.returnLend(customer, dvd)){
@@ -31,12 +31,12 @@ public class LendController {
 		}else System.out.println("error");
 	}
 
-	@RequestMapping("/lend")
+	@RequestMapping("/lendOfCustomer")
 	public void historyLend(@RequestParam(value="customer") Customer customer) throws Exception {
 		lendService.historyLend(customer);
 	}
 	
-	@RequestMapping("/lend")
+	@RequestMapping("/CurrentLendOfCustomer")
 	public void historyCurrentLend(@RequestParam(value="customer") Customer customer) throws Exception {
 		lendService.historyCurrentLend(customer);
 	}
