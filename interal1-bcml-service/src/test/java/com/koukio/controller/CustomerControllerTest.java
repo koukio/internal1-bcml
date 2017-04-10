@@ -39,7 +39,7 @@ public class CustomerControllerTest {
     @Test
     public void ValidateCustomerWrongDate() {
     	Date date = new Date(07/11/2150);
-        Assert.assertFalse(customerController.validateCustomer("Sara Herreros", "Sara", "", date, "email@outlook.com"));
+        Assert.assertFalse(customerController.validateCustomer("Sara Herreros", "Sara", "Herreros", date, "email@outlook.com"));
     }
     
     @Test
