@@ -5,7 +5,7 @@ jdk:
 before_script: cd interal1-bcml-service
 script: ./mvnw clean verify org.jacoco:jacoco-maven-plugin:report -Dmaven.test.failure.ignore=true
 
-post:
+after_success:
  - curl http://www.jpm4j.org/install/script > jpmInstall.sh
  - sudo sh jpmInstall.sh
  - cd interal1-bcml-service
