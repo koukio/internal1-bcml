@@ -22,7 +22,7 @@ public class Lend {
 	public Dvd getDvd() {
 		return dvd;
 	}
-	public void setDvd(Dvd dvd) {
+	public void setDvd(Dvd dvd) { 
 		this.dvd = dvd;
 	}
 	public Boolean getTaken() {
