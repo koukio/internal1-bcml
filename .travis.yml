@@ -3,4 +3,4 @@ jdk:
  - oraclejdk8
  
 before_script: cd interal1-bcml-service
-script: ./mvnw install
+script: ./mvnw com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=$CODACY_PROJECT_TOKEN -DapiToken=$ACCOUNT_TOKEN
