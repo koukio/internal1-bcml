@@ -3,4 +3,10 @@ jdk:
  - oraclejdk8
  
 before_script: cd interal1-bcml-service
-script: ./mvnw com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=$CODACY_PROJECT_TOKEN -DapiToken=$ACCOUNT_TOKEN
+script: ./mvnw clean verify org.jacoco:jacoco-maven-plugin:report
+
+post:
+ - curl http://www.jpm4j.org/install/script > jpmInstall.sh
+ - sudo sh jpmInstall.sh
+ - cd interal1-bcml-service
+ - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
