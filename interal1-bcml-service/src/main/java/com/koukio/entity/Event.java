@@ -40,4 +40,41 @@ public class Event {
 	public String toString(){
 		return this.action + ", " + this.object + ", " + this.eventDate.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((action == null) ? 0 : action.hashCode());
+		result = prime * result + ((eventDate == null) ? 0 : eventDate.hashCode());
+		result = prime * result + ((object == null) ? 0 : object.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Event))
+			return false;
+		Event other = (Event) obj;
+		if (action == null) {
+			if (other.action != null)
+				return false;
+		} else if (!action.equals(other.action))
+			return false;
+		if (eventDate == null) {
+			if (other.eventDate != null)
+				return false;
+		} else if (!eventDate.equals(other.eventDate))
+			return false;
+		if (object == null) {
+			if (other.object != null)
+				return false;
+		} else if (!object.equals(other.object))
+			return false;
+		return true;
+	}
 }
