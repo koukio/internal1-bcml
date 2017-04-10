@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.koukio.entity.Customer;
 import com.koukio.entity.Dvd;
 import com.koukio.entity.Lend;
 
+@Component
 public class LendService {
 
 	List<Lend> lends = new ArrayList<>();
