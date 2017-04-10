@@ -26,7 +26,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void createCustomerCreated() throws Exception {
+    public void createCustomerTest() throws Exception {
     	Date date = new Date(16/02/1964);
     	Customer customer = new Customer(0,"Alberto Perez", "Alberto", "Perez", date, "aperez@gmail.com");
     	customerService.createCustomer("Alberto Perez", "Alberto", "Perez", date, "aperez@gmail.com");
@@ -34,7 +34,7 @@ public class CustomerServiceTest {
     }
     
     @Test
-    public void updateCustomerCreated() throws Exception {
+    public void updateCustomerTest() throws Exception {
     	Date date = new Date(16/02/1964);
     	customerService.createCustomer("Alberto Perez", "Alberto", "Perez", date, "aperez@gmail.com");
     	customerService.updateCustomer(0,"Alberto Perez", "Alberto", "Perez", date, "aperez123@gmail.com");
