@@ -1,8 +1,11 @@
 package com.koukio.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.stereotype.Component;
 
@@ -41,21 +44,39 @@ public class LendService {
 		return returned;
 	}
 
-		public boolean validateLend (Customer customer){
-			int cont=0;
-			boolean lended = true;
-			for (Lend lend : lends) {
-				if (customer.equals(lend.getCustomer())) {
-					if (lend.getTaken()) {
-						cont++;
-						if (cont>=3) {
-							lended = false;
-						}
+	public boolean validateLend (Customer customer){
+		int cont=0;
+		boolean lended = true;
+		for (Lend lend : lends) {
+			if (customer.equals(lend.getCustomer())) {
+				if (lend.getTaken()) {
+					cont++;
+					if (cont>=3) {
+						lended = false;
 					}
 				}
 			}
-			return lended;
 		}
-
-
+		return lended;
 	}
+
+	public List<Lend> historyLend(Customer customer) {
+		List<Lend> historyLend = new ArrayList<Lend>();
+		for (Lend lend : lends) {
+			if (customer.equals(lend.getCustomer())) {
+				historyLend.add(lend);
+			}
+		}
+		return historyLend;
+	}
+
+	public List<Lend> historyCurrentLend(Customer customer) {
+		List<Lend> historyCurrentLend = new ArrayList<Lend>();
+		for (Lend lend : lends) {
+			if (customer.equals(lend.getCustomer()) && lend.getTaken()) {
+				historyCurrentLend.add(lend);
+			}
+		}
+		return historyCurrentLend;
+	}
+}

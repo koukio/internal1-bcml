@@ -31,4 +31,13 @@ public class LendController {
 		}else System.out.println("error");
 	}
 
+	@RequestMapping("/lend")
+	public void historyLend(@RequestParam(value="customer") Customer customer) throws Exception {
+		lendService.historyLend(customer);
+	}
+	
+	@RequestMapping("/lend")
+	public void historyCurrentLend(@RequestParam(value="customer") Customer customer) throws Exception {
+		lendService.historyCurrentLend(customer);
+	}
 }
