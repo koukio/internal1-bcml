@@ -16,34 +16,34 @@ public class LendService {
 		return String.valueOf(System.currentTimeMillis());
 	}
 
-	public Lend createLend(Customer customer, Dvd dvd,Boolean taken) throws Exception{
-		//        throw new NotImplementedException();		
-		Lend lend = new Lend(customer,dvd,taken);
-		if (validateLend(customer, taken)) {
+	public Lend createLend(Customer customer, Dvd dvd) throws Exception{
+		//        throw new NotImplementedException();
+		Lend lend = new Lend(customer,dvd);
+		if (validateLend(customer)) {
 			lends.add(lend);
 		}
 		return lend;
 	}
 
-	public Boolean returnLend(Customer customer, Dvd dvd,Boolean taken) throws Exception{
+	public Boolean returnLend(Customer customer, Dvd dvd) throws Exception{
 		//        throw new NotImplementedException();
 		boolean returned = false;
-		Lend lend = new Lend(customer,dvd,taken);
+		Lend lend = new Lend(customer,dvd);
 		for (Lend lend2 : lends) {
 			if (lend.equals(lend2)) {
-				lends.remove(lend);
+				lend2.setTaken(false);
 				returned = true;
 			}
 		}
 		return returned;
 	}
 
-		public boolean validateLend (Customer customer, boolean taken){
+		public boolean validateLend (Customer customer){
 			int cont=0;
 			boolean lended = true;
 			for (Lend lend : lends) {
 				if (customer.equals(lend.getCustomer())) {
-					if (taken) {
+					if (lend.getTaken()) {
 						cont++;
 						if (cont>=3) {
 							lended = false;

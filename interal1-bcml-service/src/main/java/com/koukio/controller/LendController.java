@@ -19,16 +19,14 @@ public class LendController {
 
 	@RequestMapping("/lend")
 	public Lend createLend(@RequestParam(value="customer") Customer customer,
-			@RequestParam(value="dvd") Dvd dvd,
-			@RequestParam(value="taken") boolean taken) throws Exception {
-		return  lendService.createLend(customer, dvd, taken);
+			@RequestParam(value="dvd") Dvd dvd) throws Exception {
+		return  lendService.createLend(customer, dvd);
 	}
 
 	@RequestMapping("/lend")
-	public void returnDvd(@RequestParam(value="customer") Customer customer,
-			@RequestParam(value="dvd") Dvd dvd,
-			@RequestParam(value="taken") boolean taken) throws Exception {
-		if (lendService.returnLend(customer, dvd, taken)){
+	public void returnLend(@RequestParam(value="customer") Customer customer,
+			@RequestParam(value="dvd") Dvd dvd) throws Exception {
+		if (lendService.returnLend(customer, dvd)){
 			System.out.println("DVD returned");
 		}else System.out.println("error");
 	}
