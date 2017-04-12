@@ -6,4 +6,4 @@
     <property name="connection.password">1234</property>
     <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
   </session-factory>
-</hibernate-configuration>
+</hibernate-configuration> 
