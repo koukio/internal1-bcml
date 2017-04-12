@@ -26,19 +26,19 @@ public class CustomerControllerTest {
     
     @Test
     public void ValidateCustomerOk() {
-    	Date date = new Date(07/11/1983);
+    	Date date = new Date(1984551065);
         Assert.assertTrue(customerController.validateCustomer("Sara Herreros", "Sara", "Herreros", date, "email@outlook.com"));
     }
     
     @Test
     public void ValidateCustomerEmptyField() {
-    	Date date = new Date(07/11/1983);
+    	Date date = new Date(1984551065);
         Assert.assertFalse(customerController.validateCustomer("Sara Herreros", "Sara", "", date, "email@outlook.com"));
     }
     
     @Test
     public void ValidateCustomerWrongDate() {
-    	Date date = new Date(07/11/2150);
+    	Date date = new Date(2150, 11, 07);
         Assert.assertFalse(customerController.validateCustomer("Sara Herreros", "Sara", "Herreros", date, "email@outlook.com"));
     }
     
