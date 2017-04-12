@@ -112,7 +112,7 @@ public class LendServiceTest {
     public void historyCurrentLendTest() throws Exception {
     	Date dateDvd = new Date(16/02/1964);
     	Date dateCustomer = new Date(16/02/1979);
-    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez7@gmail.com");
+    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez8@gmail.com");
     	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
     	Dvd dvd2 = new Dvd(1, "w", "e", "r", dateDvd);
     	Dvd dvd3 = new Dvd(2, "z", "x", "c", dateDvd);
