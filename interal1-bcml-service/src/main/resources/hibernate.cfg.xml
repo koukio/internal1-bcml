@@ -1,0 +1,9 @@
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="hibernate.connection.url">jdbc:jtds:sqlserver://KOUKIO-MIGUEL/SQL2012;database=tst</property>
+    <property name="connection.username">hibernate</property>
+    <property name="connection.password">1234</property>
+    <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+  </session-factory>
+</hibernate-configuration>
