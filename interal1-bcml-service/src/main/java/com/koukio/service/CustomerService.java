@@ -2,6 +2,7 @@ package com.koukio.service;
 
 
 import com.koukio.entity.Customer;
+import com.koukio.repository.CustomerRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +19,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class CustomerService {
 
 	List<Customer> customers = new ArrayList<>();
-			
+	
+	CustomerRepository customerRepository;
+	
 	public String ping() {
 		return String.valueOf(System.currentTimeMillis());
 	}

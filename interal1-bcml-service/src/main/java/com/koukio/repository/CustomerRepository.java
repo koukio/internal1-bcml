@@ -4,10 +4,10 @@ import org.springframework.data.domain.*;
 import org.springframework.data.repository.*;
 import com.koukio.entity.Customer;
 
-public interface CustomerRepository extends Repository<Customer, Long> {
+public interface CustomerRepository extends Repository<Customer, Integer> {
 
 	Page<Customer> findAll(Pageable pageable);
 
-	Customer findByNameAndfisrtNameAllIgnoringCase(String name, String FirstName);
+	Customer findByNameAndFisrtnameAllIgnoringCase(String name, String firstName);
 
 }

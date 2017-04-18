@@ -7,7 +7,7 @@ import org.springframework.data.repository.*;
 import com.koukio.entity.Customer;
 import com.koukio.entity.Lend;
 
-public interface LendRepository extends Repository<Lend, Long> {
+public interface LendRepository extends Repository<Lend, Integer> {
 
 	 Page<Lend> findAll(Pageable pageable);
 
