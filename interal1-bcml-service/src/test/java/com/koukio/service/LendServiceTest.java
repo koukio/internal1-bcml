@@ -26,7 +26,7 @@ public class LendServiceTest {
     	Date dateCustomer = new Date(16/02/1979);
     	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez@gmail.com");
     	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
-    	Lend lend = new Lend(customer, dvd);
+    	Lend lend = new Lend(customer, dvd, 0);
     	lendService.createLend(customer, dvd);
         Assert.assertEquals(lend, lendService.lends.get(lendService.lends.size()-1));
     }
