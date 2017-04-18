@@ -2,18 +2,34 @@ package com.koukio.entity;
 
 import java.util.Date;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
  * Customer
  */
+@Entity
 public class Customer {
+
+	@Column(nullable = false)
+	private String name;
 	
-	String name;
-	String fisrtName;
-	String lastName;
-	Date birthDate;
-	int customerId;
-	String email;
+	@Column(nullable = false)
+	private String fisrtName;
 	
+	@Column(nullable = false)
+	private String lastName;
+	
+	@Column(nullable = false)
+	private Date birthDate;
+	
+	@Id
+	@GeneratedValue
+	private int customerId;
+	
+	@Column(nullable = false)
+	private String email;
+
 	public Customer( int customerId, String name, String fisrtName, String lastName, Date birthDate, String email) {
 		this.customerId = customerId;
 		this.name = name;
@@ -122,5 +138,5 @@ public class Customer {
 			return false;
 		return true;
 	}
-	
+
 }
