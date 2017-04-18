@@ -2,9 +2,19 @@ package com.koukio.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Event {
+	
+	@Column(nullable = false)
 	public String action;
+	
+	@Column(nullable = false)
 	public String object;
+	
+	@Column(nullable = false)
 	public Date eventDate;
 	
 	public Event(String action, String object, Date eventDate) {
