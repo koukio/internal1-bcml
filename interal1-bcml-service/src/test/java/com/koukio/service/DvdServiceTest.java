@@ -56,7 +56,7 @@ public class DvdServiceTest {
 		Date dateCreated =new Date(03/05/2003);
 		Dvd dvd= dvdService.createDvd(title, description, category, dateCreated);
 		dvdService.deleteDvd(dvdService.dvdList.size()-1);
-		assertTrue(dvd.deleted);
+		assertTrue(dvd.isDeleted());
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class DvdServiceTest {
 		
 		List<Dvd> dvdListbyTitle = new ArrayList<>();
     	for (Dvd dvd1 : dvdService.dvdList) {
-			if (dvd1.title.contains("Kill Bill 2")){
+			if (dvd1.getTitle().contains("Kill Bill 2")){
 				dvdListbyTitle.add(dvd1);
 			}
 		}
@@ -79,7 +79,7 @@ public class DvdServiceTest {
 		
 		List<Dvd> dvdListbyKeyword = new ArrayList<>();
 		for (Dvd dvd1 : dvdService.dvdList) {
-			if (dvd1.description.contains("revenge")){
+			if (dvd1.getDescription().contains("revenge")){
 				dvdListbyKeyword.add(dvd1);
 			}
 		}

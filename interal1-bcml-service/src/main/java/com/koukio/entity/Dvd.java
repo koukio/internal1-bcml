@@ -2,13 +2,32 @@ package com.koukio.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Dvd {
-	public int dvdId;
-	public String title;
-	public String description;
-	public String category;
-	public Date dateCreated;
-	public boolean deleted;
+	
+	@Id
+	@GeneratedValue
+	private int dvdId;
+	
+	@Column(nullable = false)
+	private String title;
+	
+	@Column(nullable = true)
+	private String description;
+	
+	@Column(nullable = true)
+	private String category;
+	
+	@Column(nullable = false)
+	private Date dateCreated;
+	
+	@Column(nullable = false)
+	private boolean deleted;
 	
 	public Dvd(int dvdId, String title, String description, String category, Date dateCreated) {
 		this.dvdId = dvdId;
