@@ -9,11 +9,11 @@ public class Lend {
 	@Id
 	@GeneratedValue
 	private int lendId;
-	
-	@Column(nullable = false)
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private Customer customer;
 	
-	@Column(nullable = false)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Dvd dvd;
 	
 	@Column(nullable = false)
