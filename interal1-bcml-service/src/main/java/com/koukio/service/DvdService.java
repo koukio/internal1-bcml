@@ -29,7 +29,7 @@ public class DvdService {
     }
     
     public Dvd deleteDvd(int dvdId) throws Exception{
-    	dvdList.get(dvdId).deleted = true;
+    	dvdList.get(dvdId).setDeleted(true);
     	return dvdList.get(dvdId);
     }
     
@@ -40,7 +40,7 @@ public class DvdService {
     public List<Dvd> searchDvdTitle(String title) throws Exception{
     	List<Dvd> dvdListbyTitle = new ArrayList<>();
     	for (Dvd dvd : dvdList) {
-			if (dvd.title.contains(title)){
+			if (dvd.getTitle().contains(title)){
 				dvdListbyTitle.add(dvd);
 			}
 		}
@@ -50,7 +50,7 @@ public class DvdService {
     public List<Dvd> searchDvdKeyword(String keyword) throws Exception{
     	List<Dvd> dvdListbyKeyword = new ArrayList<>();
     	for (Dvd dvd : dvdList) {
-			if (dvd.description.contains(keyword)){
+			if (dvd.getDescription().contains(keyword)){
 				dvdListbyKeyword.add(dvd);
 			}
 		}
