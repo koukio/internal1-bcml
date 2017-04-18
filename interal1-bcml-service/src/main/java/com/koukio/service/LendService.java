@@ -23,8 +23,9 @@ public class LendService {
 	}
 
 	public Lend createLend(Customer customer, Dvd dvd) throws Exception{
-		//        throw new NotImplementedException();
-		Lend lend = new Lend(customer,dvd);
+		//        throw new NotImplementedException()
+		int id = lends.size();
+		Lend lend = new Lend(customer,dvd, id);
 		if (validateLend(customer)) {
 			lends.add(lend);
 		}
@@ -34,7 +35,8 @@ public class LendService {
 	public Boolean returnLend(Customer customer, Dvd dvd) throws Exception{
 		//        throw new NotImplementedException();
 		boolean returned = false;
-		Lend lend = new Lend(customer,dvd);
+		int id = lends.size();
+		Lend lend = new Lend(customer,dvd, id);
 		for (Lend lend2 : lends) {
 			if (lend.equals(lend2)) {
 				lend2.setTaken(false);

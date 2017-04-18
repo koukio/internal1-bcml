@@ -6,6 +6,10 @@ import javax.persistence.*;
 @Entity
 public class Lend {
 	
+	@Id
+	@GeneratedValue
+	private int lendId;
+	
 	@Column(nullable = false)
 	private Customer customer;
 	
@@ -15,7 +19,8 @@ public class Lend {
 	@Column(nullable = false)
 	private Boolean taken;
 	
-	public Lend(Customer customer, Dvd dvd) {
+	public Lend(Customer customer, Dvd dvd, int id) {
+		this.lendId = id;
 		this.customer = customer;
 		this.dvd = dvd;
 		this.taken = true;
