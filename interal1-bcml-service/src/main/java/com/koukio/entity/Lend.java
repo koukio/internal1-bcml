@@ -1,10 +1,19 @@
 package com.koukio.entity;
 
-public class Lend {
+import java.io.Serializable;
+import javax.persistence.*;
 
-	Customer customer;
-	Dvd dvd;
-	Boolean taken;
+@Entity
+public class Lend {
+	
+	@Column(nullable = false)
+	private Customer customer;
+	
+	@Column(nullable = false)
+	private Dvd dvd;
+	
+	@Column(nullable = false)
+	private Boolean taken;
 	
 	public Lend(Customer customer, Dvd dvd) {
 		this.customer = customer;
