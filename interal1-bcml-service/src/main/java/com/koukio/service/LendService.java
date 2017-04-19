@@ -19,13 +19,13 @@ import com.koukio.repository.LendRepository;
 public class LendService {
 
 	List<Lend> lends = new ArrayList<>();
+	Lend lend;
 
 	@Autowired
 	LendRepository lendRepository;
-	
+
 	public String ping() {
 		return String.valueOf(System.currentTimeMillis());
-		lendRepository.findByCustomerAllIgnoringCase(customer);
 	}
 
 	public Lend createLend(Customer customer, Dvd dvd) throws Exception{
@@ -35,6 +35,7 @@ public class LendService {
 		if (validateLend(customer)) {
 			lends.add(lend);
 		}
+		lendRepository.save(lend);
 		return lend;
 	}
 
@@ -48,6 +49,9 @@ public class LendService {
 				lend2.setTaken(false);
 				returned = true;
 			}
+		}
+		if(lendRepository.exists(lend.getCustomer().getCustomerId())){
+			returned = true;
 		}
 		return returned;
 	}
@@ -75,6 +79,7 @@ public class LendService {
 				historyLend.add(lend);
 			}
 		}
+		lendRepository.findByCustomerAllIgnoringCase(customer);
 		return historyLend;
 	}
 
