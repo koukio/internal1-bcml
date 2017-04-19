@@ -7,19 +7,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.koukio.entity.Customer;
 import com.koukio.entity.Dvd;
 import com.koukio.entity.Lend;
+import com.koukio.repository.LendRepository;
 
 @Component
 public class LendService {
 
 	List<Lend> lends = new ArrayList<>();
 
+	@Autowired
+	LendRepository lendRepository;
+	
 	public String ping() {
 		return String.valueOf(System.currentTimeMillis());
+		lendRepository.findByCustomerAllIgnoringCase(customer);
 	}
 
 	public Lend createLend(Customer customer, Dvd dvd) throws Exception{

@@ -8,6 +8,6 @@ public interface CustomerRepository extends Repository<Customer, Integer> {
 
 	Page<Customer> findAll(Pageable pageable);
 
-	Customer findByNameAndFisrtnameAllIgnoringCase(String name, String firstName);
+	Customer findByNameAndFisrtNameAllIgnoringCase(String name, String firstName);
 
 }
