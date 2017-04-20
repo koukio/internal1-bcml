@@ -52,7 +52,7 @@ public class DvdController {
     
     
     @RequestMapping("/showDvdList")
-    public List<Dvd> showDvdList() throws Exception {
+    public Iterable<Dvd> showDvdList() throws Exception {
         return  dvdService.showDvdList();
     }
     

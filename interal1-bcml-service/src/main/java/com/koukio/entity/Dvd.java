@@ -2,29 +2,30 @@ package com.koukio.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Dvd {
+@Table(name="Dvd")
+public class Dvd{
 	
 	@Id
+	@Column(name = "Dvd_Id", nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int dvdId;
 	
-	@Column(nullable = false)
+	@Column(name = "Title", nullable = false)
 	private String title;
 	
-	@Column(nullable = true)
+	@Column(name = "Description", nullable = false)
 	private String description;
 	
-	@Column(nullable = true)
+	@Column(name = "Category", nullable = false)
 	private String category;
 	
-	@Column(nullable = false)
+	@Column(name = "Date_Created", nullable = false)
 	private Date dateCreated;
 	
-	@Column(nullable = false)
+	@Column(name = "Deleted", nullable = false)
 	private boolean deleted;
 	
 	public Dvd(int dvdId, String title, String description, String category, Date dateCreated) {

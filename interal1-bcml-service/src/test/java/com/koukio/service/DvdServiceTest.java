@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.koukio.entity.Dvd;
+import com.koukio.repository.DvdRepository;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,6 +24,7 @@ public class DvdServiceTest {
 
 	@Autowired
 	DvdService dvdService;
+	DvdRepository dvdRepository;
 
 	@Test
 	public void createDvdTest() throws Exception{
@@ -31,7 +33,7 @@ public class DvdServiceTest {
 		String category = "Action";
 		Date dateCreated =new Date(03/05/2001);
 		Dvd dvd= dvdService.createDvd(title, description, category, dateCreated);
-		Dvd dvd2 = new Dvd(dvdService.dvdList.size()-1, title, description, category, dateCreated);
+		Dvd dvd2 = new Dvd((int) dvdRepository.count()-1, title, description, category, dateCreated);
 		Assert.assertEquals(dvd, dvd2);
 	}
 
@@ -55,7 +57,7 @@ public class DvdServiceTest {
 		String category = "Action";
 		Date dateCreated =new Date(03/05/2003);
 		Dvd dvd= dvdService.createDvd(title, description, category, dateCreated);
-		dvdService.deleteDvd(dvdService.dvdList.size()-1);
+		dvdService.deleteDvd((int) dvdRepository.count()-1);
 		assertTrue(dvd.isDeleted());
 	}
 
@@ -65,7 +67,7 @@ public class DvdServiceTest {
 		dvdService.createDvd("Kill Bill 2", "A revenge of a girl, part 2",  "Action", dateCreated);
 		
 		List<Dvd> dvdListbyTitle = new ArrayList<>();
-    	for (Dvd dvd1 : dvdService.dvdList) {
+    	for (Dvd dvd1 : dvdRepository.findAll()) {
 			if (dvd1.getTitle().contains("Kill Bill 2")){
 				dvdListbyTitle.add(dvd1);
 			}
@@ -78,7 +80,7 @@ public class DvdServiceTest {
 		dvdService.createDvd("Kill Bill 2", "A revenge of a girl, part 2",  "Action", dateCreated);
 		
 		List<Dvd> dvdListbyKeyword = new ArrayList<>();
-		for (Dvd dvd1 : dvdService.dvdList) {
+		for (Dvd dvd1 : dvdRepository.findAll()) {
 			if (dvd1.getDescription().contains("revenge")){
 				dvdListbyKeyword.add(dvd1);
 			}

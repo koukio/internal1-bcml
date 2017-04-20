@@ -1,15 +1,15 @@
 package com.koukio.repository;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.Repository;
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
 
 import com.koukio.entity.Dvd;
 
-public interface DvdRepository extends Repository<Dvd, Long> {
+public interface DvdRepository extends CrudRepository<Dvd, Integer> {
 
-	Page<Dvd> findAll(Pageable pageable);
-
-	Dvd findByTitleAndDeletedAllIgnoringCase(String title, String deleted);
+	List<Dvd> findByTitleContainingAndDeletedAllIgnoringCase(String title, Boolean deleted);
+	
+	List<Dvd> findByDescriptionContainingAndDeletedAllIgnoringCase(String keyword, Boolean deleted);
 
 }
