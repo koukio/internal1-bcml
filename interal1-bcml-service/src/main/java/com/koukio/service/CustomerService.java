@@ -26,18 +26,18 @@ public class CustomerService {
 		return String.valueOf(System.currentTimeMillis());
 	}
 
-	public Customer createCustomer(String name, String firstName, String lastName, Date birthDate, String email) throws Exception{
-		//        throw new NotImplementedException();		
+	public Customer createCustomer(String name, String firstName, String lastName, Date birthDate, String email) throws Exception{	
 		int customerId=customers.size();
 		Customer customer = new Customer(customerId, name, firstName, lastName, birthDate, email);
 		customers.add(customer);
+		customerRepository.save(customer);
 		return customer;
 	}
 	
 	public Customer updateCustomer(int customerId, String name, String firstName, String lastName, Date birthDate, String email) {
-		//      throw new NotImplementedException();
 		Customer customer = new Customer(customerId, name, firstName, lastName, birthDate, email);
 		customers.set(customerId,customer);
+		customerRepository.save(customer);
 		return customer;
 	}
 	

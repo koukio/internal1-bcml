@@ -1,11 +1,7 @@
 package com.koukio.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -69,6 +65,9 @@ public class LendService {
 				}
 			}
 		}
+		if(lendRepository.countByCustomerAndTakenAllIgnoringCase(customer, lend.getTaken())>3){
+			lended = false;
+		}
 		return lended;
 	}
 
@@ -90,6 +89,7 @@ public class LendService {
 				historyCurrentLend.add(lend);
 			}
 		}
+		lendRepository.findByCustomerAndTakenAllIgnoringCase(customer, lend.getTaken());
 		return historyCurrentLend;
 	}
 }
