@@ -2,23 +2,24 @@ package com.koukio.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="Event")
 public class Event {
 	
 	@Id
+	@Column(name = "Event_Id", nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int eventId;
 	
-	@Column(nullable = false)
+	@Column(name = "Action", nullable = false)
 	public String action;
 	
-	@Column(nullable = false)
+	@Column(name = "Object", nullable = false)
 	public String object;
 	
-	@Column(nullable = false)
+	@Column(name = "Event_Date", nullable = false)
 	public Date eventDate;
 	
 	public Event(String action, String object, Date eventDate) {

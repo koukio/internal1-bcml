@@ -1,11 +1,12 @@
 package com.koukio.service;
 
 import com.koukio.entity.Dvd;
+import com.koukio.repository.DvdRepository;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -14,47 +15,37 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 @Component
 public class DvdService {
-	List<Dvd> dvdList = new ArrayList<Dvd>();
+	
+	@Autowired
+	DvdRepository dvdRepository;
 
     public Dvd createDvd(String title, String description, String category, Date dateCreated) throws Exception{
-        Dvd dvd = new Dvd(dvdList.size(), title, description, category, dateCreated);
-        dvdList.add(dvdList.size(),dvd);
+        Dvd dvd = new Dvd((int) dvdRepository.count(), title, description, category, dateCreated);
+        dvdRepository.save(dvd);
         return dvd;
     }
     
     public Dvd updateDvd(int dvdId, String title, String description, String category, Date dateCreated) throws Exception{
         Dvd dvd = new Dvd(dvdId, title, description, category, dateCreated);
-        dvdList.set(dvdId, dvd);
+        dvdRepository.save(dvd);
     	return dvd;
     }
     
     public Dvd deleteDvd(int dvdId) throws Exception{
-    	dvdList.get(dvdId).setDeleted(true);
-    	return dvdList.get(dvdId);
+        dvdRepository.findOne(dvdId).setDeleted(true);
+    	return dvdRepository.findOne(dvdId);
     }
     
-    public List<Dvd> showDvdList() throws Exception{
-    	return dvdList;
+    public Iterable<Dvd> showDvdList() throws Exception{
+    	return dvdRepository.findAll();
     }
     
-    public List<Dvd> searchDvdTitle(String title) throws Exception{
-    	List<Dvd> dvdListbyTitle = new ArrayList<>();
-    	for (Dvd dvd : dvdList) {
-			if (dvd.getTitle().contains(title)){
-				dvdListbyTitle.add(dvd);
-			}
-		}
-    	return dvdListbyTitle;
+    public List<Dvd> searchDvdTitle(String title) throws Exception{	
+    	return dvdRepository.findByTitleContainingAndDeletedAllIgnoringCase(title, false);
     }
 
     public List<Dvd> searchDvdKeyword(String keyword) throws Exception{
-    	List<Dvd> dvdListbyKeyword = new ArrayList<>();
-    	for (Dvd dvd : dvdList) {
-			if (dvd.getDescription().contains(keyword)){
-				dvdListbyKeyword.add(dvd);
-			}
-		}
-    	return dvdListbyKeyword;
+    	return dvdRepository.findByTitleContainingAndDeletedAllIgnoringCase(keyword, false);
     }
     
     public String ping() {
