@@ -7,10 +7,8 @@ import com.koukio.repository.CustomerRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TreeSet;
 
 import org.springframework.stereotype.Component;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * CustomerService
@@ -40,6 +38,8 @@ public class CustomerService {
 		customerRepository.save(customer);
 		return customer;
 	}
-	
-	
+
+	public Iterable<Customer> showCustomerList() throws Exception{
+    	return customerRepository.findAll();
+    }
 }
