@@ -1,16 +1,14 @@
 package com.koukio.controller;
 
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.koukio.entity.Customer;
-import com.koukio.entity.Dvd;
 import com.koukio.service.CustomerService;
 
 /**
@@ -32,20 +30,22 @@ public class CustomerController {
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public String createCustomer(
-			 @RequestBody Customer input) throws Exception {
+	public Customer createCustomer(
+			@RequestParam(value="name") String name,
+			@RequestParam(value="firstName") String firstName,
+			@RequestParam(value="lastName") String lastName,
+			@RequestParam(value="birthDate") Date birthDate,
+			@RequestParam(value="email") String email) throws Exception {
 		if (validateCustomer(customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail())) {
-			customerService.createCustomer(customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail());
-			return  "Customer created";
-		}else return "Error in fields";
+			return  customerService.createCustomer(customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail());
+		}else return customer = new Customer( 0, "", "", "",new Date(0/0/0), "");
 	}	
 
 	@RequestMapping(method=RequestMethod.PUT, value = "/{customerId}")
-	public String updateCustomer( @PathVariable String userId, @RequestBody Customer input) throws Exception {
+	public Customer updateCustomer( @PathVariable String userId, @RequestBody Customer input) throws Exception {
 		if (validateCustomer(customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail())) {
-			customerService.updateCustomer(customer.getCustomerId(), customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail());
-			return "Customer update";
-		}else return "Error in fields";
+			return customerService.updateCustomer(customer.getCustomerId(), customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail());
+		}else return customer = new Customer( 0, "", "", "",new Date(0/0/0), "");
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)

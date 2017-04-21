@@ -1,8 +1,6 @@
 package com.koukio.entity;
 
 import java.util.Date;
-
-import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -30,6 +28,14 @@ public class Customer {
 	@Column(nullable = false)
 	private String email;
 
+	public Customer (){
+		this.customerId = 0;
+		this.name = "";
+		this.fisrtName = "";
+		this.lastName = "";
+		this.birthDate = new Date();
+		this.email = "";
+	}
 	public Customer( int customerId, String name, String fisrtName, String lastName, Date birthDate, String email) {
 		this.customerId = customerId;
 		this.name = name;

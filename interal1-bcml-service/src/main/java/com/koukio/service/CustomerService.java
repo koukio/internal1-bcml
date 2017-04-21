@@ -3,11 +3,7 @@ package com.koukio.service;
 
 import com.koukio.entity.Customer;
 import com.koukio.repository.CustomerRepository;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,8 +11,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CustomerService {
-
-	List<Customer> customers = new ArrayList<>();
 	
 	CustomerRepository customerRepository;
 	
@@ -25,16 +19,14 @@ public class CustomerService {
 	}
 
 	public Customer createCustomer(String name, String firstName, String lastName, Date birthDate, String email) throws Exception{	
-		int customerId=customers.size();
+		int customerId=(int) customerRepository.count();
 		Customer customer = new Customer(customerId, name, firstName, lastName, birthDate, email);
-		customers.add(customer);
 		customerRepository.save(customer);
 		return customer;
 	}
 	
 	public Customer updateCustomer(int customerId, String name, String firstName, String lastName, Date birthDate, String email) {
 		Customer customer = new Customer(customerId, name, firstName, lastName, birthDate, email);
-		customers.set(customerId,customer);
 		customerRepository.save(customer);
 		return customer;
 	}

@@ -2,6 +2,7 @@ package com.koukio.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.koukio.entity.Customer;
@@ -19,13 +20,13 @@ public class LendController {
 		return "pong:" + lendService.ping();
 	}
 
-	@RequestMapping("/createlend")
+	@RequestMapping(method=RequestMethod.POST)
 	public Lend createLend(@RequestParam(value="customer") Customer customer,
 			@RequestParam(value="dvd") Dvd dvd) throws Exception {
 		return  lendService.createLend(customer, dvd);
 	}
 
-	@RequestMapping("/returnDvd")
+	@RequestMapping(method=RequestMethod.POST)
 	public void returnLend(@RequestParam(value="customer") Customer customer,
 			@RequestParam(value="dvd") Dvd dvd) throws Exception {
 		if (lendService.returnLend(customer, dvd)){
@@ -33,12 +34,12 @@ public class LendController {
 		}else System.out.println("error");
 	}
 
-	@RequestMapping("/lendOfCustomer")
+	@RequestMapping(method=RequestMethod.POST)
 	public void historyLend(@RequestParam(value="customer") Customer customer) throws Exception {
 		lendService.historyLend(customer);
 	}
 	
-	@RequestMapping("/CurrentLendOfCustomer")
+	@RequestMapping(method=RequestMethod.POST)
 	public void historyCurrentLend(@RequestParam(value="customer") Customer customer) throws Exception {
 		lendService.historyCurrentLend(customer);
 	}
