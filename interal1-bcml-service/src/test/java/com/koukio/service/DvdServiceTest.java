@@ -1,25 +1,24 @@
 package com.koukio.service;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import com.koukio.entity.Dvd;
+import com.koukio.repository.DvdRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.koukio.entity.Dvd;
-import com.koukio.repository.DvdRepository;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@TestPropertySource(locations="classpath:application-test.properties")
 public class DvdServiceTest {
 
 	@Autowired
