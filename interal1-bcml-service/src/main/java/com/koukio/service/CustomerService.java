@@ -4,6 +4,8 @@ package com.koukio.service;
 import com.koukio.entity.Customer;
 import com.koukio.repository.CustomerRepository;
 import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerService {
 	
+	@Autowired
 	CustomerRepository customerRepository;
 	
 	public String ping() {
