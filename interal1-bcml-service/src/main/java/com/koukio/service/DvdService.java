@@ -47,7 +47,7 @@ public class DvdService {
     }
 
     public List<Dvd> searchDvdKeyword(String keyword) throws Exception{
-    	return dvdRepository.findByTitleContainingAndDeletedAllIgnoringCase(keyword, false);
+    	return dvdRepository.findByDescriptionContainingAndDeletedAllIgnoringCase(keyword, false);
     }
     
     public String ping() {
