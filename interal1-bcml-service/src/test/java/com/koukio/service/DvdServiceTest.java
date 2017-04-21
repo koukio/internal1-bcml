@@ -24,6 +24,8 @@ public class DvdServiceTest {
 
 	@Autowired
 	DvdService dvdService;
+	
+	@Autowired
 	DvdRepository dvdRepository;
 
 	@Test
@@ -33,7 +35,7 @@ public class DvdServiceTest {
 		String category = "Action";
 		Date dateCreated =new Date(03/05/2001);
 		Dvd dvd= dvdService.createDvd(title, description, category, dateCreated);
-		Dvd dvd2 = new Dvd((int) dvdRepository.count()-1, title, description, category, dateCreated);
+		Dvd dvd2 = new Dvd((int) dvdRepository.count(), title, description, category, dateCreated);
 		Assert.assertEquals(dvd, dvd2);
 	}
 
@@ -57,8 +59,8 @@ public class DvdServiceTest {
 		String category = "Action";
 		Date dateCreated =new Date(03/05/2003);
 		Dvd dvd= dvdService.createDvd(title, description, category, dateCreated);
-		dvdService.deleteDvd((int) dvdRepository.count()-1);
-		assertTrue(dvd.isDeleted());
+		dvdService.deleteDvd(dvd.getDvdId());
+		assertTrue(dvdRepository.findOne(dvd.getDvdId()).isDeleted());
 	}
 
 	@Test
