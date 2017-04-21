@@ -20,7 +20,7 @@ public class DvdService {
 	DvdRepository dvdRepository;
 
     public Dvd createDvd(String title, String description, String category, Date dateCreated) throws Exception{
-        Dvd dvd = new Dvd((int) dvdRepository.count(), title, description, category, dateCreated);
+        Dvd dvd = new Dvd((int) dvdRepository.count()+1, title, description, category, dateCreated);
         dvdRepository.save(dvd);
         return dvd;
     }
@@ -32,7 +32,9 @@ public class DvdService {
     }
     
     public Dvd deleteDvd(int dvdId) throws Exception{
-        dvdRepository.findOne(dvdId).setDeleted(true);
+        Dvd dvd = dvdRepository.findOne(dvdId);
+        dvd.setDeleted(true);
+        dvdRepository.save(dvd);
     	return dvdRepository.findOne(dvdId);
     }
     

@@ -59,12 +59,12 @@ public class DvdController {
         return  dvdService.showDvdList();
     }
     
-    @RequestMapping(method = RequestMethod.GET, value = "/search/{title}")
+    @RequestMapping(method = RequestMethod.GET, value = "/title/{title}")
     public List<Dvd> searchDvdTitle(@PathVariable String title) throws Exception {
         return  dvdService.searchDvdTitle(title);
     }
     
-    @RequestMapping(method = RequestMethod.GET, value = "/search/{keyword}")
+    @RequestMapping(method = RequestMethod.GET, value = "/keyword/{keyword}")
     public List<Dvd> searchDvdKeyword(@PathVariable String keyword) throws Exception {
         return  dvdService.searchDvdKeyword(keyword);
     }

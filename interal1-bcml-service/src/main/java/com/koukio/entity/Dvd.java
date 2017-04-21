@@ -28,6 +28,15 @@ public class Dvd{
 	@Column(name = "Deleted", nullable = false)
 	private boolean deleted;
 	
+	public Dvd() {
+		this.dvdId = 0;
+		this.title = "";
+		this.description = "";
+		this.category = "";
+		this.dateCreated = new Date(1/1/1);
+		this.deleted = false;
+	}
+	
 	public Dvd(int dvdId, String title, String description, String category, Date dateCreated) {
 		this.dvdId = dvdId;
 		this.title = title;
