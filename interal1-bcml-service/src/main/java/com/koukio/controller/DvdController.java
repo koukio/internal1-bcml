@@ -39,7 +39,7 @@ public class DvdController {
         return  dvdService.createDvd(title, description, category, dateCreated);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/{dvdId}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/{dvdId}")
     public Dvd updateDvd(@PathVariable int dvdId,
     		@RequestParam(value="title") String title,
     		@RequestParam(value="description") String description,
