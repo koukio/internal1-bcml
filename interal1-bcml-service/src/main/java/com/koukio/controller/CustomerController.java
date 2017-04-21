@@ -42,8 +42,7 @@ public class CustomerController {
 	}	
 
 	@RequestMapping(method=RequestMethod.PUT, value = "/{customerId}")
-	public Customer updateCustomer(
-	@RequestParam(value="customerId") int customerId,
+	public Customer updateCustomer(@PathVariable int customerId,
 	@RequestParam(value="name") String name,
 	@RequestParam(value="firstName") String firstName,
 	@RequestParam(value="lastName") String lastName,
