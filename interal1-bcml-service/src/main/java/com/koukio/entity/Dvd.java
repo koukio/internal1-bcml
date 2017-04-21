@@ -46,6 +46,10 @@ public class Dvd{
 		this.deleted = false;
 	}
 	
+	public Dvd(int dvdId) {
+		this.dvdId = dvdId;
+	}
+
 	public int getDvdId() {
 		return dvdId;
 	}
