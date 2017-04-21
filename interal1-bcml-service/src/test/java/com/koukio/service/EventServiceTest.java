@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.koukio.entity.Event;
+import com.koukio.repository.EventRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,6 +19,9 @@ public class EventServiceTest {
 
 	@Autowired
 	EventService eventService;
+	
+	@Autowired
+	EventRepository eventRepository;
 
 	@Test
 	public void createEvent() throws Exception{
@@ -32,7 +36,7 @@ public class EventServiceTest {
 	@Test
 	public void filterEvents() throws Exception{
 		Date firstDate = new Date(11/4/2017);
-		Date lastDate = new Date(9/4/2017);
+		Date lastDate = new Date(22/4/2017);
 		String action = "create";
 		String object = "customer";
 		Date eventDate = new Date();
