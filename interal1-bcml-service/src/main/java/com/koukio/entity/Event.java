@@ -22,6 +22,13 @@ public class Event {
 	@Column(name = "Event_Date", nullable = false)
 	public Date eventDate;
 	
+	
+	public Event() {
+		this.action = "";
+		this.object = "";
+		this.eventDate = new Date(1/1/1);
+	}
+	
 	public Event(String action, String object, Date eventDate) {
 		this.action = action;
 		this.object = object;
