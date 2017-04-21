@@ -36,16 +36,22 @@ public class CustomerController {
 			@RequestParam(value="lastName") String lastName,
 			@RequestParam(value="birthDate") Date birthDate,
 			@RequestParam(value="email") String email) throws Exception {
-		if (validateCustomer(customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail())) {
-			return  customerService.createCustomer(customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail());
-		}else return customer = new Customer( 0, "", "", "",new Date(0/0/0), "");
+		if (validateCustomer(name, firstName, lastName, birthDate, email)) {
+			return  customerService.createCustomer(name, firstName, lastName, birthDate, email);
+		}else return customer = new Customer( 0, "", "", "",new Date(1/1/1), "");
 	}	
 
 	@RequestMapping(method=RequestMethod.PUT, value = "/{customerId}")
-	public Customer updateCustomer( @PathVariable String userId, @RequestBody Customer input) throws Exception {
-		if (validateCustomer(customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail())) {
-			return customerService.updateCustomer(customer.getCustomerId(), customer.getName(), customer.getFisrtName(), customer.getLastName(), customer.getBirthDate(), customer.getEmail());
-		}else return customer = new Customer( 0, "", "", "",new Date(0/0/0), "");
+	public Customer updateCustomer(
+	@RequestParam(value="customerId") int customerId,
+	@RequestParam(value="name") String name,
+	@RequestParam(value="firstName") String firstName,
+	@RequestParam(value="lastName") String lastName,
+	@RequestParam(value="birthDate") Date birthDate,
+	@RequestParam(value="email") String email) throws Exception {
+		if (validateCustomer(name, firstName, lastName, birthDate,email)) {
+			return customerService.updateCustomer(customerId, name, firstName, lastName, birthDate,email);
+		}else return customer = new Customer( 0, "", "", "",new Date(1/1/1), "");
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)

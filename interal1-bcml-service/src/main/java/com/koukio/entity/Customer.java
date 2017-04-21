@@ -33,7 +33,7 @@ public class Customer {
 		this.name = "";
 		this.fisrtName = "";
 		this.lastName = "";
-		this.birthDate = new Date();
+		this.birthDate = new Date(1/1/1);
 		this.email = "";
 	}
 	public Customer( int customerId, String name, String fisrtName, String lastName, Date birthDate, String email) {
