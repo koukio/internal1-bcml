@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * DvdController
  */
 @RestController
+@RequestMapping("/dvd")
 public class DvdController {
 
 
@@ -23,12 +26,12 @@ public class DvdController {
 
     // check more documentation at https://spring.io/guides/gs/rest-service/
 
-    @RequestMapping("/dvdping")
+    @RequestMapping("/ping")
     public String ping() {
         return "pong:" + dvdService.ping();
     }
 
-    @RequestMapping("/createDvd")
+    @RequestMapping(method = RequestMethod.POST)
     public Dvd createDvd(@RequestParam(value="title") String title,
     		@RequestParam(value="description") String description,
     		@RequestParam(value="category") String category,
@@ -36,8 +39,8 @@ public class DvdController {
         return  dvdService.createDvd(title, description, category, dateCreated);
     }
 
-    @RequestMapping("/updateDvd")
-    public Dvd updateDvd(@RequestParam(value="dvdId") int dvdId,
+    @RequestMapping(method = RequestMethod.POST, value = "/{dvdId}")
+    public Dvd updateDvd(@PathVariable int dvdId,
     		@RequestParam(value="title") String title,
     		@RequestParam(value="description") String description,
     		@RequestParam(value="category") String category,
@@ -45,24 +48,24 @@ public class DvdController {
         return  dvdService.updateDvd(dvdId, title, description, category, dateCreated);
     }
     
-    @RequestMapping("/deleteDvd")
-    public Dvd deleteDvd(@RequestParam(value="dvdId") int dvdId) throws Exception {
+    @RequestMapping(method = RequestMethod.POST, value = "/delete/{dvdId}")
+    public Dvd deleteDvd(@PathVariable int dvdId) throws Exception {
         return  dvdService.deleteDvd(dvdId);
     }
     
     
-    @RequestMapping("/showDvdList")
+    @RequestMapping(method = RequestMethod.GET)
     public Iterable<Dvd> showDvdList() throws Exception {
         return  dvdService.showDvdList();
     }
     
-    @RequestMapping("/searchDvdTitle")
-    public List<Dvd> searchDvdTitle(@RequestParam(value="title") String title) throws Exception {
+    @RequestMapping(method = RequestMethod.GET, value = "/search/{title}")
+    public List<Dvd> searchDvdTitle(@PathVariable String title) throws Exception {
         return  dvdService.searchDvdTitle(title);
     }
     
-    @RequestMapping("/searchDvdKeyword")
-    public List<Dvd> searchDvdKeyword(@RequestParam(value="keyword") String keyword) throws Exception {
+    @RequestMapping(method = RequestMethod.GET, value = "/search/{keyword}")
+    public List<Dvd> searchDvdKeyword(@PathVariable String keyword) throws Exception {
         return  dvdService.searchDvdKeyword(keyword);
     }
 }
