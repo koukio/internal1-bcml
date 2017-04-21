@@ -45,6 +45,9 @@ public class Customer {
 		this.email = email;
 	}
 
+	public Customer(int customerId) {
+		this.customerId = customerId;
+	}
 	public String getName() {
 		return name;
 	}
