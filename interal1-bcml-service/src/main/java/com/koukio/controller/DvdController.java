@@ -26,7 +26,7 @@ public class DvdController {
 
     // check more documentation at https://spring.io/guides/gs/rest-service/
 
-    @RequestMapping("/ping")
+    @RequestMapping(method = RequestMethod.GET, value="/ping")
     public String ping() {
         return "pong:" + dvdService.ping();
     }
