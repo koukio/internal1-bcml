@@ -1,8 +1,8 @@
 package com.koukio.service;
 
-import com.koukio.entity.Customer;
-import com.koukio.entity.Dvd;
 import com.koukio.entity.Lend;
+import com.koukio.repository.LendRepository;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @TestPropertySource(locations="classpath:application-test.properties")
@@ -20,114 +18,86 @@ public class LendServiceTest {
 
     @Autowired
     LendService lendService;
+    @Autowired
+    LendRepository lendRepository;
     
     @Test
     public void createLendTest() throws Exception {
-    	Date dateDvd = new Date(16/02/1964);
-    	Date dateCustomer = new Date(16/02/1979);
-    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez@gmail.com");
-    	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
-    	Lend lend = new Lend(customer, dvd, 0);
-    	lendService.createLend(customer, dvd);
-        Assert.assertEquals(lend, lendService.lends.get(lendService.lends.size()-1));
+    	int customerId=0;
+    	int dvdId=0;
+    	Lend lend = new Lend(customerId,dvdId);
+        Assert.assertEquals(lend.getCustomerId(), lendService.createLend(customerId, dvdId).getCustomerId());
     }
     
     @Test
     public void createLendTakenTest() throws Exception {
-    	Date dateDvd = new Date(16/02/1964);
-    	Date dateCustomer = new Date(16/02/1979);
-    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez2@gmail.com");
-    	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
-    	lendService.createLend(customer, dvd);
-    	Assert.assertTrue(lendService.createLend(customer, dvd).getTaken());
+    	int customerId=1;
+    	int dvdId=1;
+    	Assert.assertTrue(lendService.createLend(customerId, dvdId).getTaken());
     }
     
     @Test
-    public void returnLendTrueTest() throws Exception {
-    	Date dateDvd = new Date(16/02/1964);
-    	Date dateCustomer = new Date(16/02/1979);
-    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez3@gmail.com");
-    	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
-    	lendService.createLend(customer, dvd);
-        Assert.assertTrue(lendService.returnLend(customer, dvd));
-    }
-    
-    @Test
-    public void returnLendFalseTest() throws Exception {
-    	Date dateDvd = new Date(16/02/1964);
-    	Date dateCustomer = new Date(16/02/1979);
-    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez4@gmail.com");
-    	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
-    	Dvd dvd2 = new Dvd(1, "w", "e", "r", dateDvd);
-    	lendService.createLend(customer, dvd);
-        Assert.assertFalse(lendService.returnLend(customer, dvd2));
+    public void returnLendTest() throws Exception {
+    	int customerId=2;
+    	int dvdId=2;
+    	Lend lend = new Lend(customerId,dvdId);
+    	lendRepository.save(lend);
+        Assert.assertTrue(lendService.returnLend(customerId, dvdId));
     }
     
     @Test
     public void validateLendTrueTest() throws Exception {
-    	Date dateDvd = new Date(16/02/1964);
-    	Date dateCustomer = new Date(16/02/1979);
-    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez5@gmail.com");
-    	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
-    	lendService.createLend(customer, dvd);
-        Assert.assertTrue(lendService.validateLend(customer));
+    	int customerId=3;
+    	int dvdId=3;
+    	Lend lend = new Lend(customerId,dvdId);
+    	lendRepository.save(lend);
+        Assert.assertTrue(lendService.validateLend(customerId));
     }
     
     @Test
     public void validateLendFalseTest() throws Exception {
-    	Date dateDvd = new Date(16/02/1964);
-    	Date dateCustomer = new Date(16/02/1979);
-    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez6@gmail.com");
-    	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
-    	Dvd dvd2 = new Dvd(1, "w", "e", "r", dateDvd);
-    	Dvd dvd3 = new Dvd(2, "z", "x", "c", dateDvd);
-    	lendService.createLend(customer, dvd);
-    	lendService.createLend(customer, dvd2);
-    	lendService.createLend(customer, dvd3);
-        Assert.assertFalse(lendService.validateLend(customer));
+    	int customerId=5;
+    	int dvdId=5;
+    	int dvdId2=6;
+    	int dvdId3=7;
+    	Lend lend = new Lend(customerId,dvdId);
+    	lendRepository.save(lend);
+    	
+    	Lend lend2 = new Lend(customerId,dvdId2);
+    	lendRepository.save(lend2);
+    	
+    	Lend lend3 = new Lend(customerId,dvdId3);
+    	lendRepository.save(lend3);
+    	
+        Assert.assertFalse(lendService.validateLend(customerId));
     }
     
     @Test
     public void historyLendTest() throws Exception {
-    	Date dateDvd = new Date(16/02/1964);
-    	Date dateCustomer = new Date(16/02/1979);
-    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez7@gmail.com");
-    	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
-    	Dvd dvd2 = new Dvd(1, "w", "e", "r", dateDvd);
-    	Dvd dvd3 = new Dvd(2, "z", "x", "c", dateDvd);
-    	Dvd dvd4 = new Dvd(3, "g", "r", "f", dateDvd);
-    	Dvd dvd5 = new Dvd(4, "m", "n", "b", dateDvd);
-    	lendService.createLend(customer, dvd);
-    	lendService.createLend(customer, dvd2);
-    	lendService.returnLend(customer, dvd);
-    	lendService.createLend(customer, dvd3);
-    	lendService.returnLend(customer, dvd3);
-    	lendService.createLend(customer, dvd4);
-    	lendService.createLend(customer, dvd5);
-    	lendService.returnLend(customer, dvd2);
-
-        Assert.assertEquals(5, lendService.historyLend(customer).size());
+    	int customerId=6;
+    	int dvdId = 8;
+    	int dvdId2= 9;
+    	int dvdId3 = 10;
+    	lendService.createLend(customerId, dvdId);
+    	lendService.createLend(customerId, dvdId2);
+    	lendService.createLend(customerId, dvdId3);
+    	
+        Assert.assertEquals(3, lendService.historyLend(customerId).size());
     }
     
     @Test
     public void historyCurrentLendTest() throws Exception {
-    	Date dateDvd = new Date(16/02/1964);
-    	Date dateCustomer = new Date(16/02/1979);
-    	Customer customer = new Customer(0, "Alberto Perez", "Alberto", "Perez", dateCustomer, "aperez8@gmail.com");
-    	Dvd dvd = new Dvd(0, "a", "s", "d", dateDvd);
-    	Dvd dvd2 = new Dvd(1, "w", "e", "r", dateDvd);
-    	Dvd dvd3 = new Dvd(2, "z", "x", "c", dateDvd);
-    	Dvd dvd4 = new Dvd(3, "g", "r", "f", dateDvd);
-    	Dvd dvd5 = new Dvd(4, "m", "n", "b", dateDvd);
-    	lendService.createLend(customer, dvd);
-    	lendService.createLend(customer, dvd2);
-    	lendService.returnLend(customer, dvd);
-    	lendService.createLend(customer, dvd3);
-    	lendService.returnLend(customer, dvd3);
-    	lendService.createLend(customer, dvd4);
-    	lendService.createLend(customer, dvd5);
-    	lendService.returnLend(customer, dvd2);
+    	int customerId=7;
+    	int dvdId = 13;
+    	int dvdId2= 14;
+    	int dvdId3 = 15;
+    	lendService.createLend(customerId, dvdId);
+    	lendService.createLend(customerId, dvdId2);    	
+    	lendService.createLend(customerId, dvdId3);
+    	
+    	lendService.returnLend(customerId, dvdId);
+    	lendService.returnLend(customerId, dvdId2);
 
-        Assert.assertEquals(2, lendService.historyCurrentLend(customer).size());
+        Assert.assertEquals(1, lendService.historyCurrentLend(customerId).size());
     }
 }

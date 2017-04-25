@@ -22,14 +22,13 @@ public class CustomerService {
 	}
 
 	public Customer createCustomer(String name, String firstName, String lastName, Date birthDate, String email) throws Exception{	
-		int customerId=(int) customerRepository.count();
-		Customer customer = new Customer(customerId, name, firstName, lastName, birthDate, email);
+		Customer customer = new Customer(name, firstName, lastName, birthDate, email);
 		customerRepository.save(customer);
 		return customer;
 	}
 	
-	public Customer updateCustomer(int customerId, String name, String firstName, String lastName, Date birthDate, String email) {
-		Customer customer = new Customer(customerId, name, firstName, lastName, birthDate, email);
+	public Customer updateCustomer(String name, String firstName, String lastName, Date birthDate, String email) {
+		Customer customer = new Customer(name, firstName, lastName, birthDate, email);
 		customerRepository.save(customer);
 		return customer;
 	}

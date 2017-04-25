@@ -3,7 +3,6 @@ package com.koukio.controller;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +37,7 @@ public class CustomerController {
 			@RequestParam(value="email") String email) throws Exception {
 		if (validateCustomer(name, firstName, lastName, birthDate, email)) {
 			return  customerService.createCustomer(name, firstName, lastName, birthDate, email);
-		}else return customer = new Customer( 0, "", "", "",new Date(1/1/1), "");
+		}else return customer = new Customer("", "", "",new Date(1/1/1), "");
 	}	
 
 	@RequestMapping(method=RequestMethod.PUT, value = "/{customerId}")
@@ -49,8 +48,8 @@ public class CustomerController {
 	@RequestParam(value="birthDate") Date birthDate,
 	@RequestParam(value="email") String email) throws Exception {
 		if (validateCustomer(name, firstName, lastName, birthDate,email)) {
-			return customerService.updateCustomer(customerId, name, firstName, lastName, birthDate,email);
-		}else return customer = new Customer( 0, "", "", "",new Date(1/1/1), "");
+			return customerService.updateCustomer(name, firstName, lastName, birthDate,email);
+		}else return customer = new Customer("", "", "",new Date(1/1/1), "");
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
