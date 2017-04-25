@@ -30,7 +30,7 @@ public class LendController {
 		return  lendService.createLend(customerId, dvdId);
 	}
 
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET)
 	public void returnLend(@RequestParam(value="customerId") int customerId,
 			@RequestParam(value="dvdId") int dvdId) throws Exception {
 		if (lendService.returnLend(customerId, dvdId)){
@@ -38,12 +38,12 @@ public class LendController {
 		}else System.out.println("error");
 	}
 
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET, value ="history/")
 	public void historyLend(@RequestParam(value="customerId") int customerId) throws Exception {
 		lendService.historyLend(customerId);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET, value ="currentHistory/")
 	public void historyCurrentLend(@RequestParam(value="customerId") int customerId) throws Exception {
 		lendService.historyCurrentLend(customerId);
 	}
