@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.koukio.entity.Lend;
 import com.koukio.service.LendService;
 
+/**
+ * LendController
+ */
 @RestController
 @RequestMapping("/lend")
 public class LendController {
