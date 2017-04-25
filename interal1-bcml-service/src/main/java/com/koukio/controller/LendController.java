@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.koukio.entity.Customer;
-import com.koukio.entity.Dvd;
 import com.koukio.entity.Lend;
 import com.koukio.service.LendService;
 
@@ -15,32 +13,32 @@ public class LendController {
 	@Autowired
 	LendService lendService;
 
-	@RequestMapping("/dvdping")
+	@RequestMapping("/ping")
 	public String ping() {
 		return "pong:" + lendService.ping();
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public Lend createLend(@RequestParam(value="customer") Customer customer,
-			@RequestParam(value="dvd") Dvd dvd) throws Exception {
-		return  lendService.createLend(customer, dvd);
+	public Lend createLend(@RequestParam(value="customerId") int customerId,
+			@RequestParam(value="dvdId") int dvdId) throws Exception {
+		return  lendService.createLend(customerId, dvdId);
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public void returnLend(@RequestParam(value="customer") Customer customer,
-			@RequestParam(value="dvd") Dvd dvd) throws Exception {
-		if (lendService.returnLend(customer, dvd)){
+	public void returnLend(@RequestParam(value="customerId") int customerId,
+			@RequestParam(value="dvdId") int dvdId) throws Exception {
+		if (lendService.returnLend(customerId, dvdId)){
 			System.out.println("DVD returned");
 		}else System.out.println("error");
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public void historyLend(@RequestParam(value="customer") Customer customer) throws Exception {
-		lendService.historyLend(customer);
+	public void historyLend(@RequestParam(value="customerId") int customerId) throws Exception {
+		lendService.historyLend(customerId);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public void historyCurrentLend(@RequestParam(value="customer") Customer customer) throws Exception {
-		lendService.historyCurrentLend(customer);
+	public void historyCurrentLend(@RequestParam(value="customerId") int customerId) throws Exception {
+		lendService.historyCurrentLend(customerId);
 	}
 }

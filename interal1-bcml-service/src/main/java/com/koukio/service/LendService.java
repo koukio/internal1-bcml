@@ -6,15 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.koukio.entity.Customer;
-import com.koukio.entity.Dvd;
 import com.koukio.entity.Lend;
 import com.koukio.repository.LendRepository;
 
 @Component
 public class LendService {
 
-	List<Lend> lends = new ArrayList<>();
 	Lend lend;
 
 	@Autowired
@@ -24,72 +21,56 @@ public class LendService {
 		return String.valueOf(System.currentTimeMillis());
 	}
 
-	public Lend createLend(Customer customer, Dvd dvd) throws Exception{
-		//        throw new NotImplementedException()
-		int id = lends.size();
-		Lend lend = new Lend(customer,dvd, id);
-		if (validateLend(customer)) {
-			lends.add(lend);
+	public Lend createLend(int customerId, int dvdId) throws Exception{
+		Lend lend = new Lend(customerId,dvdId);
+		if (validateLend(customerId)) {
+			lendRepository.save(lend);
 		}
-		lendRepository.save(lend);
+		
 		return lend;
 	}
 
-	public Boolean returnLend(Customer customer, Dvd dvd) throws Exception{
-		//        throw new NotImplementedException();
-		boolean returned = false;
-		int id = lends.size();
-		Lend lend = new Lend(customer,dvd, id);
-		for (Lend lend2 : lends) {
-			if (lend.equals(lend2)) {
-				lend2.setTaken(false);
-				returned = true;
+	public boolean returnLend(int customerId, int dvdId) throws Exception{
+		for (Lend lend : lendRepository.findAll()) {
+			if(lend.getCustomerId()==customerId && lend.getDvdId()==dvdId && lend.getTaken()==true){
+				lend.setTaken(false);
+				lendRepository.save(lend);
+				return true;
 			}
 		}
-		if(lendRepository.exists(lend.getCustomer().getCustomerId())){
-			returned = true;
-		}
-		return returned;
+		return false;
 	}
 
-	public boolean validateLend (Customer customer){
-		int cont=0;
-		boolean lended = true;
-		for (Lend lend : lends) {
-			if (customer.equals(lend.getCustomer())) {
-				if (lend.getTaken()) {
-					cont++;
-					if (cont>=3) {
-						lended = false;
-					}
-				}
+	public boolean validateLend (int customerId){
+		int cont = 0;
+		for (Lend lend : lendRepository.findAll()) {
+			if(lend.getCustomerId() == customerId && lend.getTaken() == true){
+				cont +=1;
 			}
 		}
-		if(lendRepository.countByCustomerAndTakenAllIgnoringCase(customer, lend.getTaken())>3){
-			lended = false;
-		}
-		return lended;
+		if (cont >= 3){
+			return false;
+		}else return true;
 	}
 
-	public List<Lend> historyLend(Customer customer) {
+	public List<Lend> historyLend(int customerId) {
+		
 		List<Lend> historyLend = new ArrayList<Lend>();
-		for (Lend lend : lends) {
-			if (customer.equals(lend.getCustomer())) {
+		for (Lend lend : lendRepository.findAll()) {
+			if (lend.getCustomerId() == customerId) {
 				historyLend.add(lend);
 			}
 		}
-		lendRepository.findByCustomerAllIgnoringCase(customer);
 		return historyLend;
 	}
 
-	public List<Lend> historyCurrentLend(Customer customer) {
+	public List<Lend> historyCurrentLend(int customerId) {
 		List<Lend> historyCurrentLend = new ArrayList<Lend>();
-		for (Lend lend : lends) {
-			if (customer.equals(lend.getCustomer()) && lend.getTaken()) {
+		for (Lend lend : lendRepository.findAll()) {
+			if (lend.getTaken() == true && lend.getCustomerId() == customerId) {
 				historyCurrentLend.add(lend);
 			}
 		}
-		lendRepository.findByCustomerAndTakenAllIgnoringCase(customer, lend.getTaken());
 		return historyCurrentLend;
 	}
 }
