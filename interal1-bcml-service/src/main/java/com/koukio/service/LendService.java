@@ -12,8 +12,6 @@ import com.koukio.repository.LendRepository;
 @Component
 public class LendService {
 
-	Lend lend;
-
 	@Autowired
 	LendRepository lendRepository;
 
