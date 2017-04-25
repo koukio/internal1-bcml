@@ -37,8 +37,7 @@ public class Dvd{
 		this.deleted = false;
 	}
 	
-	public Dvd(int dvdId, String title, String description, String category, Date dateCreated) {
-		this.dvdId = dvdId;
+	public Dvd(String title, String description, String category, Date dateCreated) {
 		this.title = title;
 		this.description = description;
 		this.category = category;

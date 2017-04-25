@@ -20,13 +20,18 @@ public class DvdService {
 	DvdRepository dvdRepository;
 
     public Dvd createDvd(String title, String description, String category, Date dateCreated) throws Exception{
-        Dvd dvd = new Dvd((int) dvdRepository.count()+1, title, description, category, dateCreated);
+        Dvd dvd = new Dvd(title, description, category, dateCreated);
         dvdRepository.save(dvd);
         return dvd;
     }
     
     public Dvd updateDvd(int dvdId, String title, String description, String category, Date dateCreated) throws Exception{
-        Dvd dvd = new Dvd(dvdId, title, description, category, dateCreated);
+    	Dvd dvd = new Dvd();
+    	dvd = dvdRepository.findOne(dvdId);
+    	dvd.setTitle(title);
+    	dvd.setDescription(description);
+    	dvd.setCategory(category);
+    	dvd.setDateCreated(dateCreated);
         dvdRepository.save(dvd);
     	return dvd;
     }

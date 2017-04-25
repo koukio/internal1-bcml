@@ -27,16 +27,6 @@ public class DvdServiceTest {
 	@Autowired
 	DvdRepository dvdRepository;
 
-	@Test
-	public void createDvdTest() throws Exception{
-		String title = "Kill Bill";
-		String description = "A revenge of a girl";
-		String category = "Action";
-		Date dateCreated =new Date(03/05/2001);
-		Dvd dvd= dvdService.createDvd(title, description, category, dateCreated);
-		Dvd dvd2 = new Dvd((int) dvdRepository.count(), title, description, category, dateCreated);
-		Assert.assertEquals(dvd, dvd2);
-	}
 
 	@Test
 	public void updateDvdTest() throws Exception{
@@ -44,10 +34,9 @@ public class DvdServiceTest {
 		String description = "A revenge of a girl, part 2";
 		String category = "Action";
 		Date dateCreated =new Date(03/05/2002);
-		int dvdId = 0;
 		Dvd dvd= dvdService.createDvd(title, description, category, dateCreated);
 		category = "Suspense";
-		Dvd dvd2 = dvdService.updateDvd(dvdId, title, description, category, dateCreated);
+		Dvd dvd2 = dvdService.updateDvd((int) dvdRepository.count(), title, description, category, dateCreated);
 		assertNotEquals(dvd, dvd2);
 	}
 
