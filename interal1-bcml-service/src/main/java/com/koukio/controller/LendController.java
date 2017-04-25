@@ -4,10 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.koukio.entity.Lend;
 import com.koukio.service.LendService;
 
+/**
+ * LendController
+ */
+@RestController
+@RequestMapping("/lend")
 public class LendController {
 
 	@Autowired
@@ -24,7 +30,7 @@ public class LendController {
 		return  lendService.createLend(customerId, dvdId);
 	}
 
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET)
 	public void returnLend(@RequestParam(value="customerId") int customerId,
 			@RequestParam(value="dvdId") int dvdId) throws Exception {
 		if (lendService.returnLend(customerId, dvdId)){
@@ -32,12 +38,12 @@ public class LendController {
 		}else System.out.println("error");
 	}
 
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET, value ="history/")
 	public void historyLend(@RequestParam(value="customerId") int customerId) throws Exception {
 		lendService.historyLend(customerId);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET, value ="currentHistory/")
 	public void historyCurrentLend(@RequestParam(value="customerId") int customerId) throws Exception {
 		lendService.historyCurrentLend(customerId);
 	}
