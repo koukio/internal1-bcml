@@ -22,22 +22,15 @@ public class Customer {
 	private Date birthDate;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int customerId;
 	
 	@Column(nullable = false)
 	private String email;
 
 	public Customer (){
-		this.customerId = 0;
-		this.name = "";
-		this.fisrtName = "";
-		this.lastName = "";
-		this.birthDate = new Date(1/1/1);
-		this.email = "";
 	}
-	public Customer( int customerId, String name, String fisrtName, String lastName, Date birthDate, String email) {
-		this.customerId = customerId;
+	public Customer(String name, String fisrtName, String lastName, Date birthDate, String email) {
 		this.name = name;
 		this.fisrtName = fisrtName;
 		this.lastName = lastName;
