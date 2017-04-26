@@ -37,4 +37,9 @@ public class EventController {
     		@RequestParam(value="lastDate") Date lastDate) throws Exception {
         return  eventService.filterEvents(firstDate, lastDate);
     }
+    
+    @RequestMapping(method = RequestMethod.GET)
+    public Iterable<Event> showEventList() throws Exception {
+        return  eventService.showEventList();
+    }
 }

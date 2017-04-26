@@ -25,6 +25,10 @@ public class EventService {
         return event;
     }
 	
+    public Iterable<Event> showEventList() throws Exception{
+    	return eventRepository.findAll();
+    }
+    
     public List<Event> filterEvents(Date firstDate, Date lastDate) throws Exception{
     	List<Event> eventListFiltered = new ArrayList<>();
     	for (Event event : eventRepository.findAll()) {
