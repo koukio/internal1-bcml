@@ -9,19 +9,21 @@ import org.springframework.stereotype.Component;
 import com.koukio.entity.Customer;
 import com.koukio.entity.Dvd;
 import com.koukio.entity.Lend;
+import com.koukio.repository.CustomerRepository;
 import com.koukio.repository.LendRepository;
 
 @Component
 public class LendService {
 
 	@Autowired
-	LendRepository lendRepository;
+	LendRepository lendRepository;	
 
 	public String ping() {
 		return String.valueOf(System.currentTimeMillis());
 	}
 
 	public Lend createLend(Customer customer, Dvd dvd) throws Exception{
+						
 		Lend lend = new Lend(customer,dvd);
 		if (validateLend(customer)) {
 			lendRepository.save(lend);

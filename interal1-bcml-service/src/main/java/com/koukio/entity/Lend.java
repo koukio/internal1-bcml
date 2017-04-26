@@ -9,10 +9,10 @@ public class Lend {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int lendId;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Dvd dvd;
 	
 	@Column(nullable = false)
