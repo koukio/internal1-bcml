@@ -8,10 +8,8 @@ import com.koukio.repository.EventRepository;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.jpa.criteria.expression.function.CurrentTimestampFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * DvdService
