@@ -24,9 +24,6 @@ public class Event {
 	
 	
 	public Event() {
-		this.action = "";
-		this.object = "";
-		this.eventDate = new Date(1/1/1);
 	}
 	
 	public Event(String action, String object, Date eventDate) {
