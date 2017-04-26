@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.koukio.entity.Customer;
+import com.koukio.entity.Dvd;
 import com.koukio.entity.Lend;
 import com.koukio.repository.LendRepository;
 
@@ -19,53 +21,53 @@ public class LendService {
 		return String.valueOf(System.currentTimeMillis());
 	}
 
-	public Lend createLend(int customerId, int dvdId) throws Exception{
-		Lend lend = new Lend(customerId,dvdId);
-		if (validateLend(customerId)) {
+	public Lend createLend(Customer customer, Dvd dvd) throws Exception{
+		Lend lend = new Lend(customer,dvd);
+		if (validateLend(customer)) {
 			lendRepository.save(lend);
 		}
-		
 		return lend;
 	}
 
-	public boolean returnLend(int customerId, int dvdId) throws Exception{
+	public boolean returnLend(Customer customer, Dvd dvd) throws Exception{
+		boolean returned=false;
 		for (Lend lend : lendRepository.findAll()) {
-			if(lend.getCustomerId()==customerId && lend.getDvdId()==dvdId && lend.getTaken()==true){
+			if(lend.getCustomer().equals(customer) && lend.getDvd().equals(dvd) && lend.getTaken()==true){
 				lend.setTaken(false);
 				lendRepository.save(lend);
-				return true;
+				returned = true;
 			}
 		}
-		return false;
+		return returned;
 	}
 
-	public boolean validateLend (int customerId){
+	public boolean validateLend (Customer customer){
 		int cont = 0;
 		for (Lend lend : lendRepository.findAll()) {
-			if(lend.getCustomerId() == customerId && lend.getTaken() == true){
+			if(lend.getCustomer().equals(customer) && lend.getTaken() == true){
 				cont +=1;
 			}
 		}
-		if (cont >= 3){
-			return false;
-		}else return true;
+		if (cont < 3){
+			return true;
+		}else return false;
 	}
 
-	public List<Lend> historyLend(int customerId) {
+	public List<Lend> historyLend(Customer customer) {
 		
 		List<Lend> historyLend = new ArrayList<Lend>();
 		for (Lend lend : lendRepository.findAll()) {
-			if (lend.getCustomerId() == customerId) {
+			if (lend.getCustomer().equals(customer)) {
 				historyLend.add(lend);
 			}
 		}
 		return historyLend;
 	}
 
-	public List<Lend> historyCurrentLend(int customerId) {
+	public List<Lend> historyCurrentLend(Customer customer) {
 		List<Lend> historyCurrentLend = new ArrayList<Lend>();
 		for (Lend lend : lendRepository.findAll()) {
-			if (lend.getTaken() == true && lend.getCustomerId() == customerId) {
+			if (lend.getTaken() == true && lend.getCustomer().equals(customer)) {
 				historyCurrentLend.add(lend);
 			}
 		}

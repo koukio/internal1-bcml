@@ -9,38 +9,40 @@ public class Lend {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int lendId;
 
-	@Column(nullable = false)
-	private int customerId;
+	@OneToOne(cascade=CascadeType.ALL)
+	private Customer customer;
 	
-	@Column(nullable = false)
-	private int dvdId;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Dvd dvd;
 	
 	@Column(nullable = false)
 	private Boolean taken;
 	
 	public Lend(){}
 	
-	public Lend(int customerId, int dvdId) {
-		this.customerId = customerId;
-		this.dvdId = dvdId;
+	public Lend(Customer customer, Dvd dvd) {
+		this.customer = customer;
+		this.dvd= dvd;
 		this.taken = true;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public int getDvdId() {
-		return dvdId;
+	public Dvd getDvd() {
+		return dvd;
 	}
 
-	public void setDvdId(int dvdId) {
-		this.dvdId = dvdId;
+	public void setDvd(Dvd dvd) {
+		this.dvd = dvd;
 	}
+
 	
 	public Boolean getTaken() {
 		return taken;
@@ -54,8 +56,8 @@ public class Lend {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + customerId;
-		result = prime * result + dvdId;
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((dvd == null) ? 0 : dvd.hashCode());
 		result = prime * result + lendId;
 		result = prime * result + ((taken == null) ? 0 : taken.hashCode());
 		return result;
@@ -70,9 +72,15 @@ public class Lend {
 		if (getClass() != obj.getClass())
 			return false;
 		Lend other = (Lend) obj;
-		if (customerId != other.customerId)
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
 			return false;
-		if (dvdId != other.dvdId)
+		if (dvd == null) {
+			if (other.dvd != null)
+				return false;
+		} else if (!dvd.equals(other.dvd))
 			return false;
 		if (lendId != other.lendId)
 			return false;
@@ -83,6 +91,8 @@ public class Lend {
 			return false;
 		return true;
 	}
+
+	
 
 	
 }

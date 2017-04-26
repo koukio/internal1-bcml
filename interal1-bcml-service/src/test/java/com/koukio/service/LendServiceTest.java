@@ -1,7 +1,11 @@
 package com.koukio.service;
 
+import com.koukio.entity.Customer;
+import com.koukio.entity.Dvd;
 import com.koukio.entity.Lend;
 import com.koukio.repository.LendRepository;
+
+import java.util.Date;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,82 +26,68 @@ public class LendServiceTest {
     LendRepository lendRepository;
     
     @Test
-    public void createLendTest() throws Exception {
-    	int customerId=0;
-    	int dvdId=0;
-    	Lend lend = new Lend(customerId,dvdId);
-        Assert.assertEquals(lend.getCustomerId(), lendService.createLend(customerId, dvdId).getCustomerId());
-    }
-    
-    @Test
-    public void createLendTakenTest() throws Exception {
-    	int customerId=1;
-    	int dvdId=1;
-    	Assert.assertTrue(lendService.createLend(customerId, dvdId).getTaken());
-    }
-    
-    @Test
     public void returnLendTest() throws Exception {
-    	int customerId=2;
-    	int dvdId=2;
-    	Lend lend = new Lend(customerId,dvdId);
+    	Customer customer = new Customer("nombre","apellido","2apellido",new Date(),"asdf@asd");
+    	Dvd dvd = new Dvd("titulo","descripcion","categoria",new Date());
+    	Lend lend = new Lend(customer,dvd);
     	lendRepository.save(lend);
-        Assert.assertTrue(lendService.returnLend(customerId, dvdId));
+        Assert.assertTrue(lendService.returnLend(customer, dvd));
     }
     
     @Test
     public void validateLendTrueTest() throws Exception {
-    	int customerId=3;
-    	int dvdId=3;
-    	Lend lend = new Lend(customerId,dvdId);
+    	Customer customer = new Customer("nombre2","apellido2","2apellido2",new Date(),"asdf@as2d");
+    	Dvd dvd = new Dvd("titulo2","descripcion2","categoria2",new Date());
+    	Lend lend = new Lend(customer,dvd);
     	lendRepository.save(lend);
-        Assert.assertTrue(lendService.validateLend(customerId));
+        Assert.assertTrue(lendService.validateLend(customer));
     }
     
     @Test
     public void validateLendFalseTest() throws Exception {
-    	int customerId=5;
-    	int dvdId=5;
-    	int dvdId2=6;
-    	int dvdId3=7;
-    	Lend lend = new Lend(customerId,dvdId);
+    	Customer customer = new Customer("nombre2","apellido2","2apellido2",new Date(),"asdf@as2d");
+    	Dvd dvd = new Dvd("titulo3","descripcion2","categoria2",new Date());
+    	Dvd dvd2 = new Dvd("titulo4","descripcion2","categoria2",new Date());
+    	Dvd dvd3 = new Dvd("titulo5","descripcion2","categoria2",new Date());
+    	Lend lend = new Lend(customer,dvd);
     	lendRepository.save(lend);
     	
-    	Lend lend2 = new Lend(customerId,dvdId2);
+    	Lend lend2 = new Lend(customer,dvd2);
     	lendRepository.save(lend2);
     	
-    	Lend lend3 = new Lend(customerId,dvdId3);
+    	Lend lend3 = new Lend(customer,dvd3);
     	lendRepository.save(lend3);
     	
-        Assert.assertFalse(lendService.validateLend(customerId));
+        Assert.assertFalse(lendService.validateLend(customer));
     }
     
     @Test
     public void historyLendTest() throws Exception {
-    	int customerId=6;
-    	int dvdId = 8;
-    	int dvdId2= 9;
-    	int dvdId3 = 10;
-    	lendService.createLend(customerId, dvdId);
-    	lendService.createLend(customerId, dvdId2);
-    	lendService.createLend(customerId, dvdId3);
+    	Customer customer = new Customer("nombre3","apellido3","2apellido3",new Date(),"asdf@as3d");
+    	Dvd dvd = new Dvd("titulo6","descripcion2","categoria2",new Date());
+    	Dvd dvd2 = new Dvd("titulo7","descripcion2","categoria2",new Date());
+    	Dvd dvd3 = new Dvd("titulo8","descripcion2","categoria2",new Date());
     	
-        Assert.assertEquals(3, lendService.historyLend(customerId).size());
+    	lendService.createLend(customer, dvd);
+    	lendService.createLend(customer, dvd2);
+    	lendService.createLend(customer, dvd3);
+    	
+        Assert.assertEquals(3, lendService.historyLend(customer).size());
     }
     
     @Test
     public void historyCurrentLendTest() throws Exception {
-    	int customerId=7;
-    	int dvdId = 13;
-    	int dvdId2= 14;
-    	int dvdId3 = 15;
-    	lendService.createLend(customerId, dvdId);
-    	lendService.createLend(customerId, dvdId2);    	
-    	lendService.createLend(customerId, dvdId3);
+    	Customer customer = new Customer("nombre3","apellido3","2apellido3",new Date(),"asdf@as3d");
+    	Dvd dvd = new Dvd("titulo9","descripcion2","categoria2",new Date());
+    	Dvd dvd2 = new Dvd("titulo17","descripcion2","categoria2",new Date());
+    	Dvd dvd3 = new Dvd("titulo81","descripcion2","categoria2",new Date());
+    	lendService.createLend(customer, dvd);
+    	lendService.createLend(customer, dvd2);    	
+    	lendService.createLend(customer, dvd3);
     	
-    	lendService.returnLend(customerId, dvdId);
-    	lendService.returnLend(customerId, dvdId2);
+    	lendService.returnLend(customer, dvd);
+    	lendService.returnLend(customer, dvd2);
 
-        Assert.assertEquals(1, lendService.historyCurrentLend(customerId).size());
+        Assert.assertEquals(1, lendService.historyCurrentLend(customer).size());
     }
 }
