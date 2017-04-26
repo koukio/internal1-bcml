@@ -1,11 +1,14 @@
 package com.koukio.service;
 
 import com.koukio.entity.Dvd;
+import com.koukio.entity.Event;
 import com.koukio.repository.DvdRepository;
+import com.koukio.repository.EventRepository;
 
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.jpa.criteria.expression.function.CurrentTimestampFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -18,10 +21,16 @@ public class DvdService {
 	
 	@Autowired
 	DvdRepository dvdRepository;
+	
+	@Autowired
+	EventRepository eventRepository;
 
     public Dvd createDvd(String title, String description, String category, Date dateCreated) throws Exception{
         Dvd dvd = new Dvd(title, description, category, dateCreated);
         dvdRepository.save(dvd);
+        Date date = new Date();
+        Event event = new Event("Create Dvd", String.valueOf(dvd.getDvdId()), date);
+        eventRepository.save(event);
         return dvd;
     }
     
@@ -33,6 +42,9 @@ public class DvdService {
     	dvd.setCategory(category);
     	dvd.setDateCreated(dateCreated);
         dvdRepository.save(dvd);
+        Date date = new Date();
+        Event event = new Event("Update Dvd", String.valueOf(dvd.getDvdId()), date);
+        eventRepository.save(event);
     	return dvd;
     }
     
@@ -40,6 +52,9 @@ public class DvdService {
         Dvd dvd = dvdRepository.findOne(dvdId);
         dvd.setDeleted(true);
         dvdRepository.save(dvd);
+        Date date = new Date();
+        Event event = new Event("Delete Dvd", String.valueOf(dvd.getDvdId()), date);
+        eventRepository.save(event);
     	return dvdRepository.findOne(dvdId);
     }
     
